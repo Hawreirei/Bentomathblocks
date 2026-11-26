@@ -1,0 +1,92 @@
+[
+  {
+    "id": "2-1",
+    "world": 2,
+    "title": "Split & add",
+    "hint": "A cut splits a product into a sum. Watch the number sentence.",
+    "box": { "w": 7, "h": 4 },
+    "board": { "w": 9, "h": 6 },
+    "compartments": [
+      { "x": 0, "y": 0, "w": 3, "h": 4, "label": "product", "toppings": [".N.", "...", "N..", "..N"] },
+      { "x": 3, "y": 0, "w": 4, "h": 4, "label": "product", "toppings": ["E...", "..N.", ".E..", "...N"] }
+    ],
+    "ingredients": [
+      { "kind": "tamago", "w": 5, "h": 4, "x": 1, "y": 1, "toppings": [".N...", "...N.", "N....", "..N.N"] },
+      { "kind": "salmon", "w": 2, "h": 4, "x": 7, "y": 1, "toppings": ["E.", "..", ".E", ".."] }
+    ],
+    "par": 1,
+    "rules": { "rotation": false }
+  },
+  {
+    "id": "2-2",
+    "world": 2,
+    "title": "Missing number",
+    "hint": "3 × ? = 6. How many columns does each compartment need?",
+    "box": { "w": 6, "h": 3 },
+    "board": { "w": 8, "h": 5 },
+    "compartments": [
+      { "x": 0, "y": 0, "w": 2, "h": 3, "label": "missing", "toppings": ["..", "..", ".S"] },
+      { "x": 2, "y": 0, "w": 4, "h": 3, "label": "missing", "toppings": ["S...", "....", "...."] }
+    ],
+    "ingredients": [
+      { "kind": "tamago", "w": 6, "h": 3, "x": 1, "y": 1, "toppings": ["S.....", "......", ".....S"] }
+    ],
+    "par": 1,
+    "rules": { "rotation": false }
+  },
+  {
+    "id": "2-3",
+    "world": 2,
+    "title": "Line them up",
+    "hint": "Slide the pieces so one stroke cuts both in the right places.",
+    "box": { "w": 6, "h": 4 },
+    "board": { "w": 10, "h": 7 },
+    "compartments": [
+      { "x": 0, "y": 0, "w": 4, "h": 2, "label": "product", "toppings": ["S...", "...."] },
+      { "x": 4, "y": 0, "w": 2, "h": 2, "label": "product" },
+      { "x": 0, "y": 2, "w": 2, "h": 2, "label": "product" },
+      { "x": 2, "y": 2, "w": 4, "h": 2, "label": "product", "toppings": ["....", "...E"] }
+    ],
+    "ingredients": [
+      { "kind": "rice", "w": 6, "h": 2, "x": 1, "y": 1, "toppings": ["S.....", "......"] },
+      { "kind": "salmon", "w": 6, "h": 2, "x": 1, "y": 4, "toppings": ["......", ".....E"] }
+    ],
+    "par": 1,
+    "rules": { "rotation": false }
+  },
+  {
+    "id": "2-4",
+    "world": 2,
+    "title": "Turn it",
+    "hint": "Tap a piece on the board to turn it. 4 × 2 is the same as 2 × 4.",
+    "box": { "w": 6, "h": 2 },
+    "board": { "w": 8, "h": 6 },
+    "compartments": [
+      { "x": 0, "y": 0, "w": 4, "h": 2, "label": "product", "toppings": ["...S", "...."] },
+      { "x": 4, "y": 0, "w": 2, "h": 2, "label": "product", "toppings": ["..", "E."] }
+    ],
+    "ingredients": [
+      { "kind": "carrot", "w": 2, "h": 4, "x": 1, "y": 1, "toppings": ["S.", "..", "..", ".."] },
+      { "kind": "tofu", "w": 2, "h": 2, "x": 5, "y": 1, "toppings": ["..", "E."] }
+    ],
+    "par": 0,
+    "rules": { "rotation": true }
+  },
+  {
+    "id": "2-5",
+    "world": 2,
+    "title": "Cut and turn",
+    "hint": "The tamago is too long. Cut it, then turn the pieces.",
+    "box": { "w": 4, "h": 3 },
+    "board": { "w": 9, "h": 6 },
+    "compartments": [
+      { "x": 0, "y": 0, "w": 2, "h": 3, "label": "missing", "toppings": [".N", "..", ".."] },
+      { "x": 2, "y": 0, "w": 2, "h": 3, "label": "missing", "toppings": ["..", "..", "N."] }
+    ],
+    "ingredients": [
+      { "kind": "tamago", "w": 6, "h": 2, "x": 1, "y": 1, "toppings": ["N.....", ".....N"] }
+    ],
+    "par": 1,
+    "rules": { "rotation": true }
+  }
+]

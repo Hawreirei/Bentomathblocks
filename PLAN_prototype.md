@@ -85,7 +85,7 @@ parts before packing.
 |---|---|---|
 | Language | TypeScript | Type-safe game logic |
 | Build | Vite | Fast setup, static build output |
-| Rendering | SVG in the page, no game engine | A grid puzzle doesn't need an engine; SVG stays sharp on tablets |
+| Rendering | Positioned HTML elements on a grid, with inline SVG for toppings and icons; no game engine | A grid puzzle doesn't need an engine, and plain elements make dragging simple |
 | Input | Pointer Events | One code path for mouse, touch and pen |
 | Tests | Vitest | Covers the core rules without a browser |
 | Levels | JSON files in `levels/` | Easy to write and change by hand |
@@ -145,15 +145,15 @@ unsolvable or its par is wrong.
 
 ## 6. Milestones
 
-| # | Deliverable | Done when |
-|---|---|---|
-| M0 | Project setup: Vite, TypeScript, Vitest, lint, CI | `npm test` and `npm run build` pass in CI |
-| M1 | Core logic: cut, place, win, stars, undo | Unit tests cover every rule in section 2 |
-| M2 | Playable UI with levels 1-1 to 1-4 | Playable start to finish with mouse and touch |
-| M3 | Math layer: cut equations, compartment labels, fill counters | Each cut and compartment shows the correct sentence |
-| M4 | Solver and level checker; all 16 levels authored | `check-levels` passes; every par is the proven minimum |
-| M5 | Progress, world map, stamp book, simple art and sound | Stars and unlocks survive a page reload |
-| M6 | Playtest with 3–5 children, then fix what they hit | Findings written up, top issues fixed |
+| # | Deliverable | Done when | Status |
+|---|---|---|---|
+| M0 | Project setup: Vite, TypeScript, Vitest, lint, CI | `npm test` and `npm run build` pass in CI | Passes locally; CI workflow added; no linter yet |
+| M1 | Core logic: cut, place, win, stars, undo | Unit tests cover every rule in section 2 | Done |
+| M2 | Playable UI with levels 1-1 to 1-4 | Playable start to finish with mouse and touch | Done |
+| M3 | Math layer: cut equations, compartment labels, fill counters | Each cut and compartment shows the correct sentence | Done |
+| M4 | Solver and level checker; all 16 levels authored | `check-levels` passes; every par is the proven minimum | Solver done; 11 of 16 levels |
+| M5 | Progress, world map, stamp book, simple art and sound | Stars and unlocks survive a page reload | Progress and map done; no stamp book or sound |
+| M6 | Playtest with 3–5 children, then fix what they hit | Findings written up, top issues fixed | Not started |
 
 M0–M3 make the first playable test. M4–M6 turn it into the full prototype.
 

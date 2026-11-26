@@ -14,7 +14,7 @@ The math layer, art, levels and name are our own.
 | Players | Ages 8–11, roughly grades 3–5 |
 | Math focus | Area as arrays, multiplication, the distributive property; fractions later |
 | Platform | Web browser on laptops and tablets (mouse and touch) |
-| Language | English first, with all text in one strings file so Bahasa Indonesia or another language can be added |
+| Language | English only (decided). Text still lives in one strings file, which keeps copy easy to edit |
 | Prototype size | 2 worlds, about 16 levels, no accounts, progress saved in the browser |
 | Name | "Bento Math Blocks" is a working title. It sits close to the commercial game *Bento Blocks*, so pick a distinct name before any public release (ideas: *Lunchbox Arrays*, *Snack Grid*, *Slice & Sum*) |
 
@@ -174,5 +174,4 @@ food icon.
 ## 9. Decisions needed from you
 
 1. Target age or grade, and which curriculum topics matter most.
-2. Language: English, Bahasa Indonesia, or both at launch.
-3. Final name.
+2. Final name.

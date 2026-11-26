@@ -24,16 +24,22 @@ The math layer, art, levels and name are our own.
    **compartments**.
 2. **Ingredients.** Each ingredient is a rectangle of cells (rice 2×3, tofu 3×4 and
    so on), shown with its dimensions and its cell count.
-3. **Cut.** Drag a straight line along a grid line across an ingredient to split it
-   in two. Every cut runs all the way across the piece.
-4. **Pack.** Drag pieces into a compartment. Pieces snap to the grid, must not
-   overlap, and must sit inside one compartment.
-5. **Win.** The level is solved when every compartment is full. The total area of
-   the ingredients always equals the box area, so every piece gets used.
-6. **Stars.** Each level has a par cut count. Solving at par gives 3 stars, par + 1
+3. **Cut.** Drag a straight line along a grid line across the cutting board. One knife
+   stroke counts as one cut and splits every piece it crosses all the way through.
+   (Example: a cross of two strokes turns a 4×4 block into four 2×2 pieces.)
+4. **Toppings.** Some cells carry a topping (salmon, edamame, nori and so on); the
+   rest are plain. Each box cell shows a faint outline of the topping it needs, or
+   nothing if it needs a plain cell.
+5. **Pack.** Drag pieces into a compartment. Pieces snap to the grid, must not
+   overlap, must sit inside one compartment, and every topping must land on its
+   matching outline.
+6. **Win.** The level is solved when every compartment is full and every topping
+   matches. The total area of the ingredients always equals the box area, so every
+   piece gets used.
+7. **Stars.** Each level has a par cut count. Solving at par gives 3 stars, par + 1
    gives 2, and any other solve gives 1. There is no timer and no fail state.
-7. **Undo and reset** are always available.
-8. **Rotation is locked at first.** It unlocks in World 2 as the "turn it" power,
+8. **Undo and reset** are always available.
+9. **Rotation is locked at first.** It unlocks in World 2 as the "turn it" power,
    taught as the commutative property: 3×4 = 4×3.
 
 ## 3. The math layer (what makes it more than a reskin)
@@ -93,7 +99,7 @@ src/
   core/            pure logic, no DOM, fully unit-tested
     types.ts       Cell, Piece, Compartment, Level, GameState
     cut.ts         split a piece along a grid line, returning 2 pieces and the equation
-    place.ts       fit, overlap and in-compartment checks; snapping
+    place.ts       fit, overlap, in-compartment and topping-match checks; snapping
     rules.ts       win check, star scoring, rotation permission
     history.ts     undo stack
   ui/
@@ -113,11 +119,15 @@ tests/             Vitest specs for core/ and the solver
   "id": "1-3",
   "box": { "w": 4, "h": 4 },
   "compartments": [
-    { "x": 0, "y": 0, "w": 4, "h": 4, "label": { "type": "count", "value": 16 } }
+    {
+      "x": 0, "y": 0, "w": 4, "h": 4,
+      "label": { "type": "count", "value": 16 },
+      "toppings": ["....", ".S..", "....", "...E"]
+    }
   ],
   "ingredients": [
-    { "kind": "sausage", "w": 6, "h": 2 },
-    { "kind": "egg", "w": 2, "h": 2 }
+    { "kind": "sausage", "w": 6, "h": 2, "toppings": ["......", ".S...."] },
+    { "kind": "egg", "w": 2, "h": 2, "toppings": ["..", ".E"] }
   ],
   "par": 1,
   "rules": { "cutDirections": ["vertical", "horizontal"], "rotation": false }

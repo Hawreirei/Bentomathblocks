@@ -45,7 +45,20 @@ export interface LevelDef {
   compartments: CompartmentDef[];
   ingredients: IngredientDef[];
   par: number;
+  /** A full solution at par. The level checker replays it, so every level is proven solvable. */
+  solution: SolutionStep[];
 }
+
+/**
+ * One step of a written solution. Pieces are named by the board cell of their top-left corner.
+ * - cut: a knife stroke along board grid line `line`
+ * - slide: move a board piece to another board position
+ * - pack: move a board piece into the box, top-left at box cell `to`
+ */
+export type SolutionStep =
+  | { cut: Orientation; line: number }
+  | { slide: [number, number]; to: [number, number] }
+  | { pack: [number, number]; to: [number, number] };
 
 export type Area = 'board' | 'box';
 

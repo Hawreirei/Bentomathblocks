@@ -14,7 +14,13 @@
       { "kind": "tamago", "w": 5, "h": 4, "x": 1, "y": 1, "toppings": [".N...", "...N.", "N....", "..N.N"] },
       { "kind": "salmon", "w": 2, "h": 4, "x": 7, "y": 1, "toppings": ["E.", "..", ".E", ".."] }
     ],
-    "par": 1
+    "par": 1,
+    "solution": [
+      { "cut": "vertical", "line": 4 },
+      { "pack": [1, 1], "to": [0, 0] },
+      { "pack": [4, 1], "to": [5, 0] },
+      { "pack": [7, 1], "to": [3, 0] }
+    ]
   },
   {
     "id": "2-2",
@@ -30,7 +36,12 @@
     "ingredients": [
       { "kind": "tamago", "w": 6, "h": 3, "x": 1, "y": 1, "toppings": ["S.....", "......", ".....S"] }
     ],
-    "par": 1
+    "par": 1,
+    "solution": [
+      { "cut": "vertical", "line": 5 },
+      { "pack": [1, 1], "to": [2, 0] },
+      { "pack": [5, 1], "to": [0, 0] }
+    ]
   },
   {
     "id": "2-3",
@@ -49,7 +60,15 @@
       { "kind": "rice", "w": 6, "h": 2, "x": 1, "y": 1, "toppings": ["S.....", "......"] },
       { "kind": "salmon", "w": 6, "h": 2, "x": 1, "y": 4, "toppings": ["......", ".....E"] }
     ],
-    "par": 1
+    "par": 1,
+    "solution": [
+      { "slide": [1, 4], "to": [3, 4] },
+      { "cut": "vertical", "line": 5 },
+      { "pack": [1, 1], "to": [0, 0] },
+      { "pack": [5, 1], "to": [4, 0] },
+      { "pack": [3, 4], "to": [0, 2] },
+      { "pack": [5, 4], "to": [2, 2] }
+    ]
   },
   {
     "id": "2-4",
@@ -66,7 +85,14 @@
     "ingredients": [
       { "kind": "tofu", "w": 6, "h": 3, "x": 1, "y": 1, "toppings": ["S.....", ".....E", "..N..."] }
     ],
-    "par": 2
+    "par": 2,
+    "solution": [
+      { "cut": "horizontal", "line": 3 },
+      { "pack": [1, 3], "to": [0, 2] },
+      { "cut": "vertical", "line": 5 },
+      { "pack": [1, 1], "to": [0, 0] },
+      { "pack": [5, 1], "to": [4, 0] }
+    ]
   },
   {
     "id": "2-5",
@@ -85,6 +111,14 @@
       { "kind": "rice", "w": 4, "h": 3, "x": 1, "y": 1, "toppings": ["S...", "....", "...."] },
       { "kind": "salmon", "w": 4, "h": 3, "x": 1, "y": 5, "toppings": ["....", "...E", "...."] }
     ],
-    "par": 1
+    "par": 1,
+    "solution": [
+      { "slide": [1, 1], "to": [3, 1] },
+      { "cut": "vertical", "line": 4 },
+      { "pack": [3, 1], "to": [0, 0] },
+      { "pack": [4, 1], "to": [1, 0] },
+      { "pack": [1, 5], "to": [4, 0] },
+      { "pack": [4, 5], "to": [7, 0] }
+    ]
   }
 ]

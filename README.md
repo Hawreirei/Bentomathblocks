@@ -54,6 +54,24 @@ tests/        Vitest specs
 ## Adding a level
 
 Add an entry to `levels/world1.json` or `levels/world2.json`. Toppings are written as
-rows of characters: `.` plain, `S` salmon, `E` edamame, `N` nori. Then run
-`npm run check-levels`. It fails if the level is malformed or if `par` is not the
-fewest cuts the solver can find.
+rows of characters: `.` plain, `S` salmon, `E` edamame, `N` nori.
+
+Every level must include a `solution`: the steps that finish it at par. Pieces are
+named by the board cell of their top-left corner.
+
+```json
+"solution": [
+  { "cut": "horizontal", "line": 3 },
+  { "pack": [1, 3], "to": [0, 2] },
+  { "slide": [1, 1], "to": [3, 1] }
+]
+```
+
+Then run `npm run check-levels`. It fails unless:
+
+- the level is well formed, and the food has exactly the toppings the box needs;
+- the solution plays through the real rules (board size, strokes that cut every
+  piece they cross, topping checks) and fills the box in exactly `par` cuts;
+- no solution exists with fewer than `par` cuts;
+- the level can still be finished after any cuts at all (cutting everything into
+  single cells always packs), so a player can never get stuck.

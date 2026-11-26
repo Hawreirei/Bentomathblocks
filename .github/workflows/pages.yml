@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - claude/loving-lovelace-gr9aig
   workflow_dispatch:
 
 permissions:

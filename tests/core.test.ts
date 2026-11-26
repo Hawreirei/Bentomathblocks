@@ -31,6 +31,7 @@ const level: LevelDef = {
   ],
   ingredients: [{ kind: 'rice', w: 3, h: 2, x: 1, y: 1, toppings: ['S..', '..E'] }],
   par: 1,
+  solution: [],
 };
 
 describe('cutting', () => {

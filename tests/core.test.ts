@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { applyStroke, cutSentence, piecesCrossed, rotatedPiece, splitPiece } from '../src/core/cut';
-import { rotateClockwise } from '../src/core/grid';
+import { applyStroke, cutSentence, piecesCrossed, splitPiece } from '../src/core/cut';
 import { History } from '../src/core/history';
 import { canPlaceOnBoard, checkBoxPlacement, filledCells } from '../src/core/place';
 import { isSolved, labelText, starsFor } from '../src/core/rules';
@@ -32,15 +31,7 @@ const level: LevelDef = {
   ],
   ingredients: [{ kind: 'rice', w: 3, h: 2, x: 1, y: 1, toppings: ['S..', '..E'] }],
   par: 1,
-  rules: { rotation: false },
 };
-
-describe('grid', () => {
-  it('turns a grid clockwise', () => {
-    expect(rotateClockwise(['S.', '..', '..', '..'])).toEqual(['...S', '....']);
-    expect(rotateClockwise(['SE'])).toEqual(['S', 'E']);
-  });
-});
 
 describe('cutting', () => {
   it('splits a piece vertically, keeping toppings and positions', () => {
@@ -87,11 +78,6 @@ describe('cutting', () => {
     const state = initialState(level);
     expect(applyStroke(state, 'vertical', 1)).toBeNull();
     expect(applyStroke(state, 'horizontal', 3)).toBeNull();
-  });
-
-  it('turns a piece, swapping its size', () => {
-    const turned = rotatedPiece(piece({ w: 2, h: 4, toppings: ['S.', '..', '..', '..'] }));
-    expect(turned).toMatchObject({ w: 4, h: 2, toppings: ['...S', '....'] });
   });
 });
 

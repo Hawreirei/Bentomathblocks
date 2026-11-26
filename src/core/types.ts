@@ -45,7 +45,6 @@ export interface LevelDef {
   compartments: CompartmentDef[];
   ingredients: IngredientDef[];
   par: number;
-  rules: { rotation: boolean };
 }
 
 export type Area = 'board' | 'box';
@@ -68,7 +67,7 @@ export interface GameState {
   nextId: number;
 }
 
-/** A number sentence produced by a cut or a turn. */
+/** A number sentence produced by a cut. */
 export interface Sentence {
   /** e.g. "4 × 5 = 4 × 3 + 4 × 2" */
   factors: string;

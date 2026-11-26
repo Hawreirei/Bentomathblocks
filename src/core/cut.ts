@@ -1,4 +1,4 @@
-import { rotateClockwise, sliceColumns, sliceRows } from './grid';
+import { sliceColumns, sliceRows } from './grid';
 import { cloneState } from './state';
 import type { GameState, Orientation, Piece, Sentence } from './types';
 
@@ -14,10 +14,6 @@ export function cutSentence(h: number, w: number, orientation: Orientation, at: 
     factors: `${h} × ${w} = ${at} × ${w} + ${h - at} × ${w}`,
     totals: `${h * w} = ${at * w} + ${(h - at) * w}`,
   };
-}
-
-export function turnSentence(h: number, w: number): Sentence {
-  return { factors: `${h} × ${w} = ${w} × ${h}`, totals: `${h * w} = ${h * w}` };
 }
 
 /**
@@ -76,9 +72,4 @@ export function applyStroke(state: GameState, orientation: Orientation, line: nu
   }
   next.cuts += 1;
   return { state: next, sentences };
-}
-
-/** The piece turned a quarter turn clockwise around its top-left corner. */
-export function rotatedPiece(piece: Piece): Piece {
-  return { ...piece, w: piece.h, h: piece.w, toppings: rotateClockwise(piece.toppings) };
 }

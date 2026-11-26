@@ -26,7 +26,8 @@ Then open the address Vite prints (usually http://localhost:5173).
   one cut.
 - **Pack:** drag pieces into the lunch box. Each piece must sit inside one
   compartment, and each topping must land on its matching outline.
-- **Turn:** from World 2, level 2-4 on, tap a piece on the board to turn it.
+- **No turning:** pieces always keep the direction they start in, so where you cut
+  matters.
 - **Stars:** finish at or under par for 3 stars, par + 1 for 2, anything else for 1.
 - **Undo:** the Undo button, or Ctrl/Cmd + Z.
 

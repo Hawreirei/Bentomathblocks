@@ -39,8 +39,8 @@ The math layer, art, levels and name are our own.
 7. **Stars.** Each level has a par cut count. Solving at par gives 3 stars, par + 1
    gives 2, and any other solve gives 1. There is no timer and no fail state.
 8. **Undo and reset** are always available.
-9. **Rotation is locked at first.** It unlocks in World 2 as the "turn it" power,
-   taught as the commutative property: 3×4 = 4×3.
+9. **Pieces never turn.** Every piece keeps the direction it starts in, so where
+   and in which order you cut is the puzzle.
 
 ## 3. The math layer (what makes it more than a reskin)
 
@@ -50,7 +50,6 @@ The math layer, art, levels and name are our own.
   gets harder by world: first a count (`12`), then a product (`3 × 4`), then a
   missing number (`3 × ? = 12`).
 - **Fill counter.** Each compartment shows how full it is, for example `8 / 12`.
-- **Rotation lesson.** Turning a piece shows `3 × 4 = 4 × 3`.
 - **Stamp book.** Every equation a player makes is stamped into a collection page
   to review later.
 
@@ -62,7 +61,7 @@ then both directions. Compartments are labelled with counts.
 
 ### World 2: Split & Add (8 levels)
 Teaches the distributive property. Compartments are labelled with products, then
-missing numbers. Rotation unlocks halfway through.
+missing numbers. Later levels need cuts in two directions, in the right order.
 
 ### Stretch: World 3, Fraction Bento
 Compartments labelled `½ of the box` or `¼ of the box`; cut an ingredient into equal
@@ -77,7 +76,7 @@ parts before packing.
 | 1-3 | 4×4, one compartment | sausage 2×6, egg 2×2 | 1 | Cut to fit: 2×6 → 2×4 + 2×2 |
 | 1-4 | 3×4, compartments 3×1, 3×1, 3×2 | tofu 3×4 | 2 | Several cuts on one piece |
 | 2-1 | 4×5, compartments `4 × 3` and `4 × 2` | omelette 4×5 | 1 | 4×5 = 4×3 + 4×2 |
-| 2-5 | 3×4, one compartment | carrot 4×3 | 0 | Rotation: 4×3 = 3×4 |
+| 2-4 | 3×6 box: 2×4, 2×2 and 1×6 | tofu 3×6 | 2 | Cut across first, then down; order matters |
 
 ## 5. Technology
 
@@ -100,11 +99,11 @@ src/
     types.ts       Cell, Piece, Compartment, Level, GameState
     cut.ts         split a piece along a grid line, returning 2 pieces and the equation
     place.ts       fit, overlap, in-compartment and topping-match checks; snapping
-    rules.ts       win check, star scoring, rotation permission
+    rules.ts       win check, star scoring, label text
     history.ts     undo stack
   ui/
     render.ts      draws board, pieces, labels and equations as SVG
-    input.ts       drag to cut, drag to move, tap to rotate
+    input.ts       drag to cut, drag to move
     screens.ts     title, world map, level, stamp book
   data/strings.ts  all player-facing text, ready for translation
 levels/            world1.json, world2.json
@@ -129,8 +128,7 @@ tests/             Vitest specs for core/ and the solver
     { "kind": "sausage", "w": 6, "h": 2, "toppings": ["......", ".S...."] },
     { "kind": "egg", "w": 2, "h": 2, "toppings": ["..", ".E"] }
   ],
-  "par": 1,
-  "rules": { "cutDirections": ["vertical", "horizontal"], "rotation": false }
+  "par": 1
 }
 ```
 

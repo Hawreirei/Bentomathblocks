@@ -3,10 +3,9 @@
  *
  * Model: players can slide pieces anywhere on the board before a stroke, so one
  * stroke can cut any set of pieces, each at its own offset, as long as all cuts in
- * the stroke run the same way. When turning is allowed, a piece can be turned
- * first, so a stroke can then cut pieces either way.
+ * the stroke run the same way. Pieces never turn.
  */
-import { rotateClockwise, sliceColumns, sliceRows, toppingAt } from './grid';
+import { sliceColumns, sliceRows, toppingAt } from './grid';
 import { compartmentToppings } from './state';
 import type { LevelDef, ToppingGrid } from './types';
 
@@ -19,22 +18,6 @@ export interface SolverPiece {
 const pieceKey = (p: SolverPiece): string => `${p.h}x${p.w}:${p.t.join('/')}`;
 const stateKey = (ps: SolverPiece[]): string => ps.map(pieceKey).sort().join('|');
 
-function orientations(p: SolverPiece, rotation: boolean): SolverPiece[] {
-  if (!rotation) return [p];
-  const out: SolverPiece[] = [];
-  const seen = new Set<string>();
-  let cur = p;
-  for (let i = 0; i < 4; i++) {
-    const k = pieceKey(cur);
-    if (!seen.has(k)) {
-      seen.add(k);
-      out.push(cur);
-    }
-    cur = { w: cur.h, h: cur.w, t: rotateClockwise(cur.t) };
-  }
-  return out;
-}
-
 /** Whether these pieces, uncut, exactly fill every compartment with toppings matching. */
 export function canPack(level: LevelDef, pieces: SolverPiece[]): boolean {
   const boxArea = level.compartments.reduce((s, c) => s + c.w * c.h, 0);
@@ -45,7 +28,6 @@ export function canPack(level: LevelDef, pieces: SolverPiece[]): boolean {
     need: compartmentToppings(c),
     filled: Array.from({ length: c.h }, () => new Array<boolean>(c.w).fill(false)),
   }));
-  const options = pieces.map((p) => orientations(p, level.rules.rotation));
   const used = new Array<boolean>(pieces.length).fill(false);
 
   const firstEmpty = (): { ci: number; r: number; c: number } | null => {
@@ -68,7 +50,8 @@ export function canPack(level: LevelDef, pieces: SolverPiece[]): boolean {
       const k = pieceKey(pieces[j]);
       if (tried.has(k)) continue;
       tried.add(k);
-      for (const o of options[j]) {
+      {
+        const o = pieces[j];
         if (spot.c + o.w > comp.c.w || spot.r + o.h > comp.c.h) continue;
         let fits = true;
         for (let r = 0; r < o.h && fits; r++) {
@@ -118,8 +101,8 @@ function applyOption(p: SolverPiece, o: Exclude<CutOption, null>): SolverPiece[]
 }
 
 /** Every state one knife stroke away. */
-function strokesFrom(pieces: SolverPiece[], rotation: boolean): SolverPiece[][] {
-  const passes: Array<Array<'v' | 'h'>> = rotation ? [['v', 'h']] : [['v'], ['h']];
+function strokesFrom(pieces: SolverPiece[]): SolverPiece[][] {
+  const passes: Array<Array<'v' | 'h'>> = [['v'], ['h']];
   const results: SolverPiece[][] = [];
   for (const dirs of passes) {
     const opts = pieces.map((p) => cutOptions(p, dirs));
@@ -161,7 +144,7 @@ export function minCuts(level: LevelDef, maxCuts = 4): number | null {
     if (depth === maxCuts) break;
     const next = new Map<string, SolverPiece[]>();
     for (const ps of frontier.values()) {
-      for (const n of strokesFrom(ps, level.rules.rotation)) {
+      for (const n of strokesFrom(ps)) {
         const k = stateKey(n);
         if (seen.has(k)) continue;
         seen.add(k);

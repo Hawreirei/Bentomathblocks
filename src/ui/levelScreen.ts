@@ -1,4 +1,4 @@
-import { applyStroke, piecesCrossed, rotatedPiece, turnSentence } from '../core/cut';
+import { applyStroke, piecesCrossed } from '../core/cut';
 import { History } from '../core/history';
 import { canPlaceOnBoard, checkBoxPlacement, filledCells } from '../core/place';
 import { isSolved, labelText, starsFor } from '../core/rules';
@@ -132,8 +132,7 @@ export function mountLevel(opts: LevelScreenOptions): () => void {
         cells.push(`<div class="cell" style="background:${colors.fill}">${toppingSvg(t)}</div>`);
       }
     }
-    const turnable = level.rules.rotation && p.area === 'board';
-    return `<div class="piece${turnable ? ' turnable' : ''}" data-id="${p.id}" role="img"
+    return `<div class="piece" data-id="${p.id}" role="img"
       aria-label="${STRINGS.piece(colors.name, p.h, p.w)}"
       style="left:${px(left)};top:${px(top)};width:${px(p.w * layout.cs - 2 * PIECE_INSET)};height:${px(p.h * layout.cs - 2 * PIECE_INSET)};
       grid-template-columns:repeat(${p.w},1fr);grid-template-rows:repeat(${p.h},1fr);background:${colors.edge}">
@@ -232,7 +231,6 @@ export function mountLevel(opts: LevelScreenOptions): () => void {
 
   function render(): void {
     const stars = starsFor(state.cuts, level.par);
-    const help = [STRINGS.boardHelpCut, level.rules.rotation ? STRINGS.boardHelpTurn : ''].filter(Boolean).join(' ');
     root.innerHTML = `
       <div class="screen level-screen">
         <header class="topbar">
@@ -252,7 +250,7 @@ export function mountLevel(opts: LevelScreenOptions): () => void {
         </header>
         <div class="toast ${toast.tone}" aria-live="polite">${toastHtml()}</div>
         <div class="stage" style="width:${px(layout.stageW)};height:${px(layout.stageH)}">${stageHtml()}</div>
-        <p class="hint">${level.hint} <span class="muted">${help}</span></p>
+        <p class="hint">${level.hint} <span class="muted">${STRINGS.boardHelpCut}</span></p>
       </div>
       ${winHtml()}`;
     if (solved) root.querySelector<HTMLButtonElement>('.dialog .primary, .dialog [data-action="replay"]')?.focus();
@@ -313,21 +311,6 @@ export function mountLevel(opts: LevelScreenOptions): () => void {
     }
     found = [...found, ...result.sentences];
     commit(result.state, { tone: 'good', text: STRINGS.toast.cut(result.sentences.length), sentences: result.sentences });
-  }
-
-  function turn(piece: Piece): void {
-    if (!level.rules.rotation) {
-      warn(STRINGS.toast.noTurn);
-      return;
-    }
-    if (piece.w === piece.h && piece.toppings.join('') === '.'.repeat(piece.w * piece.h)) return;
-    const turned = rotatedPiece(piece);
-    if (!canPlaceOnBoard(level, state, turned, turned.x, turned.y)) {
-      warn(STRINGS.toast.noRoom);
-      return;
-    }
-    const next = { ...state, pieces: state.pieces.map((p) => (p.id === piece.id ? turned : p)) };
-    commit(next, { tone: 'good', text: STRINGS.toast.turn, sentences: [turnSentence(piece.h, piece.w)] });
   }
 
   function drop(piece: Piece, left: number, top: number): void {
@@ -436,9 +419,9 @@ export function mountLevel(opts: LevelScreenOptions): () => void {
     const piece = state.pieces.find((p) => p.id === d.id);
     if (!piece) return render();
     if (Math.hypot(d.dx, d.dy) < TAP_DISTANCE) {
+      // A tap, not a drag. Pieces never turn, so leave it where it is.
       d.el.classList.remove('dragging');
       d.el.style.transform = '';
-      if (piece.area === 'board') turn(piece);
       return;
     }
     const origin = pieceOrigin(piece);

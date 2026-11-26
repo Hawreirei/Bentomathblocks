@@ -18,17 +18,13 @@ export const STRINGS = {
   board: 'Cutting board',
   box: 'Lunch box',
   boardHelpCut: 'Drag across an empty spot of the board to cut.',
-  boardHelpTurn: 'Tap a piece on the board to turn it.',
   toast: {
     start: 'Fill every compartment. Each topping must land on its outline.',
     cut: (n: number) => (n === 1 ? 'Nice cut!' : `One stroke, ${n} cuts!`),
-    turn: 'Turning does not change the area.',
     missed: 'That line misses every piece. Try a line through the food.',
     outside: 'Each piece must fit inside one compartment.',
     overlap: 'That spot is already taken.',
     topping: 'Toppings must land on their matching outlines.',
-    noTurn: 'Turning unlocks in World 2.',
-    noRoom: 'No room to turn it here. Move it first.',
     boardFull: 'No room there on the board.',
   },
   win: {

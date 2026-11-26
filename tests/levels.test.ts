@@ -105,3 +105,16 @@ describe('solution replay', () => {
     expect(result).toMatchObject({ ok: false, step: 2 });
   });
 });
+
+describe('box layout', () => {
+  // The game draws a label strip above every row where a compartment starts. That only
+  // works if no other compartment spans across that row.
+  for (const level of LEVELS) {
+    it(`${level.id} has compartment rows that line up`, () => {
+      const starts = new Set(level.compartments.map((c) => c.y).filter((y) => y > 0));
+      for (const c of level.compartments) {
+        for (const y of starts) expect(c.y < y && y < c.y + c.h, `compartment at (${c.x}, ${c.y}) spans row ${y}`).toBe(false);
+      }
+    });
+  }
+});

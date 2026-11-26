@@ -135,5 +135,56 @@
       { "pack": [1, 4], "to": [2, 0] },
       { "pack": [3, 4], "to": [0, 2] }
     ]
+  },
+  {
+    "id": "1-7",
+    "world": 1,
+    "title": "Stack and slice",
+    "hint": "Cut across this time. Which strip goes where?",
+    "box": { "w": 3, "h": 4 },
+    "board": { "w": 7, "h": 7 },
+    "compartments": [
+      { "x": 0, "y": 0, "w": 3, "h": 1, "label": "count", "toppings": ["..S"] },
+      { "x": 0, "y": 1, "w": 3, "h": 2, "label": "count", "toppings": ["...", ".E."] },
+      { "x": 0, "y": 3, "w": 3, "h": 1, "label": "count", "toppings": ["N.."] }
+    ],
+    "ingredients": [
+      { "kind": "tamago", "w": 3, "h": 4, "x": 2, "y": 1, "toppings": ["N..", "...", ".E.", "..S"] }
+    ],
+    "par": 2,
+    "solution": [
+      { "cut": "horizontal", "line": 2 },
+      { "cut": "horizontal", "line": 4 },
+      { "pack": [2, 1], "to": [0, 3] },
+      { "pack": [2, 2], "to": [0, 1] },
+      { "pack": [2, 4], "to": [0, 0] }
+    ]
+  },
+  {
+    "id": "1-8",
+    "world": 1,
+    "title": "Two directions",
+    "hint": "One block needs a cut down, the other a cut across.",
+    "box": { "w": 4, "h": 4 },
+    "board": { "w": 8, "h": 7 },
+    "compartments": [
+      { "x": 0, "y": 0, "w": 2, "h": 2, "label": "count", "toppings": [".E", ".."] },
+      { "x": 2, "y": 0, "w": 2, "h": 2, "label": "count", "toppings": ["..", ".S"] },
+      { "x": 0, "y": 2, "w": 2, "h": 2, "label": "count", "toppings": ["S.", ".."] },
+      { "x": 2, "y": 2, "w": 2, "h": 2, "label": "count", "toppings": ["..", "N."] }
+    ],
+    "ingredients": [
+      { "kind": "rice", "w": 4, "h": 2, "x": 1, "y": 1, "toppings": ["S..E", "...."] },
+      { "kind": "tofu", "w": 2, "h": 4, "x": 6, "y": 1, "toppings": ["..", "N.", "..", ".S"] }
+    ],
+    "par": 2,
+    "solution": [
+      { "cut": "vertical", "line": 3 },
+      { "cut": "horizontal", "line": 3 },
+      { "pack": [1, 1], "to": [0, 2] },
+      { "pack": [3, 1], "to": [0, 0] },
+      { "pack": [6, 1], "to": [2, 2] },
+      { "pack": [6, 3], "to": [2, 0] }
+    ]
   }
 ]

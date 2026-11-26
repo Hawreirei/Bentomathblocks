@@ -149,7 +149,7 @@ unsolvable or its par is wrong.
 | M1 | Core logic: cut, place, win, stars, undo | Unit tests cover every rule in section 2 | Done |
 | M2 | Playable UI with levels 1-1 to 1-4 | Playable start to finish with mouse and touch | Done |
 | M3 | Math layer: cut equations, compartment labels, fill counters | Each cut and compartment shows the correct sentence | Done |
-| M4 | Solver and level checker; all 16 levels authored | `check-levels` passes; every par is the proven minimum | Solver done; 11 of 16 levels |
+| M4 | Solver and level checker; all 16 levels authored | `check-levels` passes; every par is the proven minimum | Done: 16 levels, each with a replayed solution |
 | M5 | Progress, world map, stamp book, simple art and sound | Stars and unlocks survive a page reload | Progress and map done; no stamp book or sound |
 | M6 | Playtest with 3–5 children, then fix what they hit | Findings written up, top issues fixed | Not started |
 

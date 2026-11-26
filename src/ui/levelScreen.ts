@@ -34,6 +34,14 @@ interface Layout {
   box: Rect;
   /** Top-left pixel of box cell (0, 0). */
   boxGrid: { left: number; top: number };
+  /**
+   * Pixel top of each box row, 0..box.h (the last entry is the bottom edge). Rows where a
+   * compartment starts get an extra strip above them so its label never covers food.
+   */
+  boxRowTop: number[];
+  /** Height of a label strip, and the label font size, both scaled to the cell size. */
+  labelGap: number;
+  labelFont: number;
 }
 
 type ToastTone = 'info' | 'good' | 'warn';
@@ -50,7 +58,6 @@ type Drag =
 
 const BOARD_PAD = 12;
 const BOX_PAD = 20;
-const BOX_PAD_TOP = 30;
 const GAP = 44;
 const MAX_CELL = 60;
 const PIECE_INSET = 2;
@@ -63,10 +70,22 @@ function computeLayout(level: LevelDef, available: number): Layout {
   if (!sideBySide) cs = Math.floor((available - 2 * BOX_PAD) / Math.max(board.w, box.w));
   cs = Math.max(24, Math.min(MAX_CELL, cs));
 
+  const labelFont = Math.max(11, Math.min(17, Math.round(cs * 0.29)));
+  const labelGap = Math.round(labelFont * 1.35) + 10;
+  const padTop = labelGap + 2;
+  // Every row where a compartment begins (other than the top row) gets a label strip above it.
+  const labelRows = new Set(level.compartments.map((c) => c.y).filter((y) => y > 0));
+  const rowOffsets: number[] = [];
+  let extra = 0;
+  for (let y = 0; y <= box.h; y++) {
+    if (labelRows.has(y)) extra += labelGap;
+    rowOffsets.push(y * cs + extra);
+  }
+
   const boardW = board.w * cs + 2 * BOARD_PAD;
   const boardH = board.h * cs + 2 * BOARD_PAD;
   const boxW = box.w * cs + 2 * BOX_PAD;
-  const boxH = box.h * cs + BOX_PAD_TOP + BOX_PAD;
+  const boxH = rowOffsets[box.h] + padTop + BOX_PAD;
 
   let boardRect: Rect;
   let boxRect: Rect;
@@ -90,8 +109,21 @@ function computeLayout(level: LevelDef, available: number): Layout {
     board: boardRect,
     boardGrid: { left: boardRect.left + BOARD_PAD, top: boardRect.top + BOARD_PAD },
     box: boxRect,
-    boxGrid: { left: boxRect.left + BOX_PAD, top: boxRect.top + BOX_PAD_TOP },
+    boxGrid: { left: boxRect.left + BOX_PAD, top: boxRect.top + padTop },
+    boxRowTop: rowOffsets.map((o) => boxRect.top + padTop + o),
+    labelGap,
+    labelFont,
   };
+}
+
+/** The label text that fits a compartment of the given pixel width, and whether the fill counter fits too. */
+function fitLabel(text: string, counter: string, width: number, font: number): { text: string; counter: boolean; font: number } {
+  const widthOf = (s: string, f: number) => s.length * f * 0.56 + 16;
+  if (widthOf(`${text} ${counter}`, font) <= width) return { text, counter: true, font };
+  if (widthOf(text, font) <= width) return { text, counter: false, font };
+  const compact = text.replace(/ /g, '');
+  if (widthOf(compact, font) <= width) return { text: compact, counter: false, font };
+  return { text: compact, counter: false, font: Math.max(10, Math.floor(font * 0.85)) };
 }
 
 const px = (n: number) => `${Math.round(n * 10) / 10}px`;
@@ -118,8 +150,20 @@ export function mountLevel(opts: LevelScreenOptions): () => void {
   // ---------- rendering ----------
 
   function pieceOrigin(p: Piece): { left: number; top: number } {
-    const g = p.area === 'board' ? layout.boardGrid : layout.boxGrid;
-    return { left: g.left + p.x * layout.cs + PIECE_INSET, top: g.top + p.y * layout.cs + PIECE_INSET };
+    if (p.area === 'board') {
+      const g = layout.boardGrid;
+      return { left: g.left + p.x * layout.cs + PIECE_INSET, top: g.top + p.y * layout.cs + PIECE_INSET };
+    }
+    return { left: layout.boxGrid.left + p.x * layout.cs + PIECE_INSET, top: layout.boxRowTop[p.y] + PIECE_INSET };
+  }
+
+  /** The box row whose top is nearest a pixel position, for a piece `h` rows tall. */
+  function nearestBoxRow(top: number, h: number): number {
+    let best = 0;
+    for (let y = 1; y + h <= level.box.h; y++) {
+      if (Math.abs(layout.boxRowTop[y] - top) < Math.abs(layout.boxRowTop[best] - top)) best = y;
+    }
+    return best;
   }
 
   function pieceHtml(p: Piece): string {
@@ -142,27 +186,32 @@ export function mountLevel(opts: LevelScreenOptions): () => void {
   }
 
   function boxHtml(): string {
-    const { cs, boxGrid } = layout;
+    const { cs, boxGrid, boxRowTop, labelGap, labelFont } = layout;
     const out: string[] = [];
     level.compartments.forEach((comp, i) => {
-      out.push(`<div class="compartment" style="left:${px(boxGrid.left + comp.x * cs + 3)};top:${px(boxGrid.top + comp.y * cs + 3)};
-        width:${px(comp.w * cs - 6)};height:${px(comp.h * cs - 6)}"></div>`);
+      const top = boxRowTop[comp.y];
+      out.push(`<div class="compartment" style="left:${px(boxGrid.left + comp.x * cs + 3)};top:${px(top + 3)};
+        width:${px(comp.w * cs - 6)};height:${px(boxRowTop[comp.y + comp.h] - top - 6)}"></div>`);
       const need = compartmentToppings(comp);
       for (let r = 0; r < comp.h; r++) {
         for (let c = 0; c < comp.w; c++) {
           const x = comp.x + c;
           const y = comp.y + r;
           const flash = flashCell && flashCell.x === x && flashCell.y === y ? ' flash' : '';
-          out.push(`<div class="slot${flash}" style="left:${px(boxGrid.left + x * cs + 5)};top:${px(boxGrid.top + y * cs + 5)};
+          out.push(`<div class="slot${flash}" data-x="${x}" data-y="${y}" style="left:${px(boxGrid.left + x * cs + 5)};top:${px(boxRowTop[y] + 5)};
             width:${px(cs - 10)};height:${px(cs - 10)}">${ghostSvg(need[r].charAt(c) as Topping)}</div>`);
         }
       }
       const filled = filledCells(state, comp);
       const area = comp.w * comp.h;
       const full = filled === area;
+      const fit = fitLabel(labelText(comp, full), `${filled}/${area}`, comp.w * cs + 6, labelFont);
+      const status = full ? ICONS.check : fit.counter ? `${filled}/${area}` : '';
+      // Centred in the strip just above the compartment, so it never covers a cell.
       out.push(`<div class="label${full ? ' full' : ''}" data-comp="${i}"
-        style="left:${px(boxGrid.left + (comp.x + comp.w / 2) * cs)};top:${px(boxGrid.top + comp.y * cs)}">
-        <b>${labelText(comp, full)}</b><span>${full ? ICONS.check : `${filled}/${area}`}</span></div>`);
+        aria-label="${labelText(comp, full)}, ${filled} of ${area} filled"
+        style="left:${px(boxGrid.left + (comp.x + comp.w / 2) * cs)};top:${px(top - labelGap / 2 + 1)};font-size:${fit.font}px">
+        <b>${fit.text}</b>${status ? `<span>${status}</span>` : ''}</div>`);
     });
     return out.join('');
   }
@@ -322,7 +371,7 @@ export function mountLevel(opts: LevelScreenOptions): () => void {
 
     if (inside(layout.box, cx, cy)) {
       const x = Math.round((cellLeft - layout.boxGrid.left) / cs);
-      const y = Math.round((cellTop - layout.boxGrid.top) / cs);
+      const y = nearestBoxRow(cellTop, piece.h);
       if (piece.area === 'box' && piece.x === x && piece.y === y) return render();
       const check = checkBoxPlacement(level, state, piece, x, y);
       if (!check.ok) {

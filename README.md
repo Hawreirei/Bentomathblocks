@@ -53,7 +53,7 @@ tests/        Vitest specs
 
 ## Adding a level
 
-Add an entry to `levels/world1.json` or `levels/world2.json`. Toppings are written as
+Add an entry to `levels/world1.json`, `levels/world2.json` or `levels/world3.json`. Toppings are written as
 rows of characters: `.` plain, `S` salmon, `E` edamame, `N` nori.
 
 Every level must include a `solution`: the steps that finish it at par. Pieces are

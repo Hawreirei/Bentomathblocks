@@ -15,7 +15,7 @@ The math layer, art, levels and name are our own.
 | Math focus | Area as arrays, multiplication, the distributive property; fractions later |
 | Platform | Web browser on laptops and tablets (mouse and touch) |
 | Language | English only (decided). Text still lives in one strings file, which keeps copy easy to edit |
-| Prototype size | 2 worlds, about 16 levels, no accounts, progress saved in the browser |
+| Prototype size | 3 worlds, 24 levels, no accounts, progress saved in the browser |
 | Name | "Bento Math Blocks" is a working title. It sits close to the commercial game *Bento Blocks*, so pick a distinct name before any public release (ideas: *Lunchbox Arrays*, *Snack Grid*, *Slice & Sum*) |
 
 ## 2. Core rules
@@ -63,7 +63,12 @@ then both directions. Compartments are labelled with counts.
 Teaches the distributive property. Compartments are labelled with products, then
 missing numbers. Later levels need cuts in two directions, in the right order.
 
-### Stretch: World 3, Fraction Bento
+### World 3: Chef's Challenge (8 levels)
+Harder puzzles that combine the earlier tricks: one compartment filled with pieces
+from different blocks, one stroke through three blocks at different offsets, sliding
+pieces between strokes, and three-cut sequences where the order matters.
+
+### Stretch: World 4, Fraction Bento
 Compartments labelled `½ of the box` or `¼ of the box`; cut an ingredient into equal
 parts before packing.
 
@@ -106,7 +111,7 @@ src/
     input.ts       drag to cut, drag to move
     screens.ts     title, world map, level, stamp book
   data/strings.ts  all player-facing text, ready for translation
-levels/            world1.json, world2.json
+levels/            world1.json, world2.json, world3.json
 tools/solver.ts    checks a level is solvable and finds its minimum cut count
 tests/             Vitest specs for core/ and the solver
 ```
@@ -149,7 +154,7 @@ unsolvable or its par is wrong.
 | M1 | Core logic: cut, place, win, stars, undo | Unit tests cover every rule in section 2 | Done |
 | M2 | Playable UI with levels 1-1 to 1-4 | Playable start to finish with mouse and touch | Done |
 | M3 | Math layer: cut equations, compartment labels, fill counters | Each cut and compartment shows the correct sentence | Done |
-| M4 | Solver and level checker; all 16 levels authored | `check-levels` passes; every par is the proven minimum | Done: 16 levels, each with a replayed solution |
+| M4 | Solver and level checker; all 16 levels authored | `check-levels` passes; every par is the proven minimum | Done: 24 levels in 3 worlds, each with a replayed solution |
 | M5 | Progress, world map, stamp book, simple art and sound | Stars and unlocks survive a page reload | Progress and map done; no stamp book or sound |
 | M6 | Playtest with 3–5 children, then fix what they hit | Findings written up, top issues fixed | Not started |
 

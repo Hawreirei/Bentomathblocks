@@ -1,0 +1,242 @@
+[
+  {
+    "id": "3-1",
+    "world": 3,
+    "title": "Patchwork",
+    "hint": "Each compartment takes two pieces from different blocks. Line up all three for one stroke.",
+    "box": { "w": 4, "h": 6 },
+    "board": { "w": 9, "h": 10 },
+    "compartments": [
+      { "x": 0, "y": 0, "w": 4, "h": 2, "label": "missing", "toppings": ["S.E.", "...."] },
+      { "x": 0, "y": 2, "w": 4, "h": 2, "label": "missing" },
+      { "x": 0, "y": 4, "w": 4, "h": 2, "label": "missing", "toppings": ["..N.", "N..."] }
+    ],
+    "ingredients": [
+      { "kind": "rice", "w": 4, "h": 2, "x": 1, "y": 1, "toppings": ["S...", "...."] },
+      { "kind": "tamago", "w": 4, "h": 2, "x": 1, "y": 4, "toppings": ["N...", "..N."] },
+      { "kind": "salmon", "w": 4, "h": 2, "x": 1, "y": 7, "toppings": [".E..", "...."] }
+    ],
+    "par": 1,
+    "solution": [
+      { "slide": [1, 1], "to": [3, 1] },
+      { "slide": [1, 4], "to": [2, 4] },
+      { "cut": "vertical", "line": 4 },
+      { "pack": [3, 1], "to": [0, 0] },
+      { "pack": [1, 7], "to": [1, 0] },
+      { "pack": [4, 7], "to": [0, 2] },
+      { "pack": [4, 1], "to": [1, 2] },
+      { "pack": [4, 4], "to": [0, 4] },
+      { "pack": [2, 4], "to": [2, 4] }
+    ]
+  },
+  {
+    "id": "3-2",
+    "world": 3,
+    "title": "Long and short",
+    "hint": "Cut both blocks down together. Then cut across, but only the rice.",
+    "box": { "w": 6, "h": 4 },
+    "board": { "w": 9, "h": 7 },
+    "compartments": [
+      { "x": 0, "y": 0, "w": 6, "h": 1, "label": "product", "toppings": ["...SS."] },
+      { "x": 0, "y": 1, "w": 2, "h": 3, "label": "missing", "toppings": ["..", "E.", ".."] },
+      { "x": 2, "y": 1, "w": 4, "h": 3, "label": "missing", "toppings": ["....", "..N.", "...."] }
+    ],
+    "ingredients": [
+      { "kind": "rice", "w": 6, "h": 3, "x": 1, "y": 1, "toppings": [".....S", "E.....", "....N."] },
+      { "kind": "sausage", "w": 6, "h": 1, "x": 1, "y": 5, "toppings": ["S....."] }
+    ],
+    "par": 2,
+    "solution": [
+      { "cut": "vertical", "line": 3 },
+      { "pack": [1, 1], "to": [0, 1] },
+      { "cut": "horizontal", "line": 2 },
+      { "pack": [3, 1], "to": [0, 0] },
+      { "pack": [1, 5], "to": [4, 0] },
+      { "pack": [3, 2], "to": [2, 1] },
+      { "pack": [3, 5], "to": [2, 3] }
+    ]
+  },
+  {
+    "id": "3-3",
+    "world": 3,
+    "title": "Three cuts",
+    "hint": "Three cuts for one block. Pack the top strip before you cut down.",
+    "box": { "w": 6, "h": 4 },
+    "board": { "w": 9, "h": 7 },
+    "compartments": [
+      { "x": 0, "y": 0, "w": 6, "h": 1, "label": "product", "toppings": ["..S..E"] },
+      { "x": 0, "y": 1, "w": 3, "h": 3, "label": "missing", "toppings": ["...", "E..", "..S"] },
+      { "x": 3, "y": 1, "w": 2, "h": 3, "label": "missing" },
+      { "x": 5, "y": 1, "w": 1, "h": 3, "label": "missing", "toppings": ["N", ".", "."] }
+    ],
+    "ingredients": [
+      { "kind": "tofu", "w": 6, "h": 4, "x": 1, "y": 1, "toppings": ["..S..E", "N.....", "...E..", ".....S"] }
+    ],
+    "par": 3,
+    "solution": [
+      { "cut": "horizontal", "line": 2 },
+      { "pack": [1, 1], "to": [0, 0] },
+      { "cut": "vertical", "line": 2 },
+      { "cut": "vertical", "line": 4 },
+      { "pack": [1, 2], "to": [5, 1] },
+      { "pack": [2, 2], "to": [3, 1] },
+      { "pack": [4, 2], "to": [0, 1] }
+    ]
+  },
+  {
+    "id": "3-4",
+    "world": 3,
+    "title": "Square dance",
+    "hint": "Eight squares, two strokes. Every compartment mixes rice and tofu.",
+    "box": { "w": 8, "h": 4 },
+    "board": { "w": 10, "h": 10 },
+    "compartments": [
+      { "x": 0, "y": 0, "w": 4, "h": 2, "label": "product", "toppings": ["E..N", "...."] },
+      { "x": 4, "y": 0, "w": 4, "h": 2, "label": "product", "toppings": ["S...", "...."] },
+      { "x": 0, "y": 2, "w": 4, "h": 2, "label": "product", "toppings": ["....", "S.N."] },
+      { "x": 4, "y": 2, "w": 4, "h": 2, "label": "product", "toppings": [".S..", "...E"] }
+    ],
+    "ingredients": [
+      { "kind": "rice", "w": 4, "h": 4, "x": 1, "y": 1, "toppings": ["S...", "...E", ".N..", "..S."] },
+      { "kind": "tofu", "w": 4, "h": 4, "x": 1, "y": 6, "toppings": ["..E.", "N...", "...S", "...."] }
+    ],
+    "par": 2,
+    "solution": [
+      { "cut": "vertical", "line": 3 },
+      { "slide": [1, 6], "to": [6, 1] },
+      { "slide": [3, 6], "to": [8, 1] },
+      { "cut": "horizontal", "line": 3 },
+      { "pack": [8, 1], "to": [0, 0] },
+      { "pack": [1, 3], "to": [2, 0] },
+      { "pack": [1, 1], "to": [4, 0] },
+      { "pack": [6, 3], "to": [6, 0] },
+      { "pack": [3, 3], "to": [0, 2] },
+      { "pack": [6, 1], "to": [2, 2] },
+      { "pack": [8, 3], "to": [4, 2] },
+      { "pack": [3, 1], "to": [6, 2] }
+    ]
+  },
+  {
+    "id": "3-5",
+    "world": 3,
+    "title": "Slide between",
+    "hint": "Two strokes, but the salmon must move between them.",
+    "box": { "w": 12, "h": 4 },
+    "board": { "w": 10, "h": 11 },
+    "compartments": [
+      { "x": 0, "y": 0, "w": 1, "h": 4, "label": "missing", "toppings": [".", ".", "E", "."] },
+      { "x": 1, "y": 0, "w": 3, "h": 4, "label": "missing", "toppings": ["...", ".S.", "...", "..."] },
+      { "x": 4, "y": 0, "w": 2, "h": 4, "label": "missing", "toppings": ["..", "..", "..", ".E"] },
+      { "x": 6, "y": 0, "w": 2, "h": 4, "label": "missing", "toppings": ["N.", "..", "..", ".."] },
+      { "x": 8, "y": 0, "w": 2, "h": 4, "label": "missing", "toppings": ["..", "E.", "..", ".."] },
+      { "x": 10, "y": 0, "w": 2, "h": 4, "label": "missing", "toppings": ["..", "..", "..", "N."] }
+    ],
+    "ingredients": [
+      { "kind": "tamago", "w": 7, "h": 4, "x": 1, "y": 1, "toppings": ["N......", "...S...", ".......", ".....N."] },
+      { "kind": "salmon", "w": 5, "h": 4, "x": 1, "y": 6, "toppings": [".....", ".E...", "E....", "....E"] }
+    ],
+    "par": 2,
+    "solution": [
+      { "slide": [1, 6], "to": [2, 6] },
+      { "cut": "vertical", "line": 3 },
+      { "slide": [3, 6], "to": [4, 6] },
+      { "cut": "vertical", "line": 6 },
+      { "pack": [2, 6], "to": [0, 0] },
+      { "pack": [3, 1], "to": [1, 0] },
+      { "pack": [6, 6], "to": [4, 0] },
+      { "pack": [1, 1], "to": [6, 0] },
+      { "pack": [4, 6], "to": [8, 0] },
+      { "pack": [6, 1], "to": [10, 0] }
+    ]
+  },
+  {
+    "id": "3-6",
+    "world": 3,
+    "title": "Three in order",
+    "hint": "Across, down, across. Get the order right and keep pieces out of the knife.",
+    "box": { "w": 5, "h": 5 },
+    "board": { "w": 9, "h": 9 },
+    "compartments": [
+      { "x": 0, "y": 0, "w": 5, "h": 1, "label": "product", "toppings": ["..S.E"] },
+      { "x": 0, "y": 1, "w": 2, "h": 4, "label": "missing", "toppings": ["N.", "..", "..", ".S"] },
+      { "x": 2, "y": 1, "w": 3, "h": 4, "label": "missing", "toppings": ["..N", "...", "...", "E.."] }
+    ],
+    "ingredients": [
+      { "kind": "tofu", "w": 5, "h": 5, "x": 1, "y": 1, "toppings": ["..S.E", "N....", "..E..", "....N", ".S..."] }
+    ],
+    "par": 3,
+    "solution": [
+      { "cut": "horizontal", "line": 2 },
+      { "pack": [1, 1], "to": [0, 0] },
+      { "cut": "vertical", "line": 3 },
+      { "pack": [1, 2], "to": [0, 1] },
+      { "cut": "horizontal", "line": 4 },
+      { "pack": [3, 4], "to": [2, 1] },
+      { "pack": [3, 2], "to": [2, 3] }
+    ]
+  },
+  {
+    "id": "3-7",
+    "world": 3,
+    "title": "Grand patchwork",
+    "hint": "Six pieces, three compartments, two strokes. Which pieces share a compartment?",
+    "box": { "w": 6, "h": 6 },
+    "board": { "w": 10, "h": 9 },
+    "compartments": [
+      { "x": 0, "y": 0, "w": 6, "h": 2, "label": "product", "toppings": ["......", ".E..E."] },
+      { "x": 0, "y": 2, "w": 6, "h": 2, "label": "product", "toppings": ["..N...", "N....."] },
+      { "x": 0, "y": 4, "w": 6, "h": 2, "label": "product", "toppings": [".S..S.", "......"] }
+    ],
+    "ingredients": [
+      { "kind": "rice", "w": 6, "h": 4, "x": 1, "y": 1, "toppings": ["S.....", "....E.", "...S..", "N....."] },
+      { "kind": "tamago", "w": 6, "h": 2, "x": 1, "y": 6, "toppings": ["N.....", ".....E"] }
+    ],
+    "par": 2,
+    "solution": [
+      { "slide": [1, 1], "to": [3, 1] },
+      { "cut": "vertical", "line": 5 },
+      { "cut": "horizontal", "line": 3 },
+      { "pack": [5, 6], "to": [0, 0] },
+      { "pack": [5, 1], "to": [2, 0] },
+      { "pack": [3, 3], "to": [0, 2] },
+      { "pack": [1, 6], "to": [2, 2] },
+      { "pack": [5, 3], "to": [0, 4] },
+      { "pack": [3, 1], "to": [4, 4] }
+    ]
+  },
+  {
+    "id": "3-8",
+    "world": 3,
+    "title": "Master chef",
+    "hint": "Three blocks, two strokes. The second stroke cuts each block at a different height.",
+    "box": { "w": 9, "h": 6 },
+    "board": { "w": 10, "h": 11 },
+    "compartments": [
+      { "x": 0, "y": 0, "w": 3, "h": 3, "label": "missing", "toppings": ["...", ".N.", "..."] },
+      { "x": 3, "y": 0, "w": 3, "h": 3, "label": "missing", "toppings": ["..E", "...", "..E"] },
+      { "x": 6, "y": 0, "w": 3, "h": 3, "label": "missing", "toppings": ["S..", "...", "S.."] },
+      { "x": 0, "y": 3, "w": 3, "h": 3, "label": "missing", "toppings": ["...", "N..", "..N"] },
+      { "x": 3, "y": 3, "w": 3, "h": 1, "label": "product" }
+    ],
+    "ingredients": [
+      { "kind": "tofu", "w": 6, "h": 4, "x": 1, "y": 1, "toppings": ["S....E", "......", ".N....", "...N.."] },
+      { "kind": "sausage", "w": 6, "h": 1, "x": 1, "y": 6, "toppings": ["..E..."] },
+      { "kind": "tamago", "w": 3, "h": 3, "x": 1, "y": 8, "toppings": ["S..", "...", "..N"] }
+    ],
+    "par": 2,
+    "solution": [
+      { "cut": "vertical", "line": 4 },
+      { "slide": [4, 1], "to": [4, 0] },
+      { "slide": [1, 8], "to": [7, 0] },
+      { "cut": "horizontal", "line": 2 },
+      { "pack": [1, 2], "to": [0, 0] },
+      { "pack": [4, 0], "to": [3, 0] },
+      { "pack": [1, 6], "to": [3, 2] },
+      { "pack": [7, 0], "to": [6, 0] },
+      { "pack": [1, 1], "to": [6, 2] },
+      { "pack": [4, 2], "to": [0, 3] },
+      { "pack": [7, 2], "to": [0, 5] },
+      { "pack": [4, 6], "to": [3, 3] }
+    ]
+  }
+]

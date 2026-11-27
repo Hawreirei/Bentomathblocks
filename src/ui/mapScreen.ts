@@ -18,6 +18,7 @@ export function isUnlocked(progress: Progress, index: number): boolean {
 const BOX_FILLS = [
   ['#FBF7EE', '#F6C945', '#5FAF5A', '#F59479'],
   ['#F6C945', '#F59479'],
+  ['#F59479', '#FBF7EE', '#F6C945', '#5FAF5A'],
 ];
 
 export function mountMap(opts: MapScreenOptions): () => void {
